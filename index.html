@@ -260,7 +260,7 @@
  <h1>Penetration Testing Tools & API Keys</h1>
 
  <h2>My Playlist</h2>
- <div id="spotify-embed-container" style="margin: 20px 0;"></div>
+ <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/15b7xA62YzjM9BwwpycIOc?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
  <h2>General</h2>
  <ul>
@@ -1707,18 +1707,6 @@
 
 </div>
 
-<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
-<script>
-  window.onSpotifyIframeApiReady = (IFrameAPI) => {
-    const element = document.getElementById('spotify-embed-container');
-    const options = {
-      uri: 'spotify:playlist:15b7xA62YzjM9BwwpycIOc',
-      width: '100%',
-      height: 352,
-    };
-    IFrameAPI.createController(element, options, (EmbedController) => {});
-  };
-</script>
 <script>
   // JavaScript for Matrix effect - (from your original file)
   const canvas = document.getElementById('matrix-canvas');
