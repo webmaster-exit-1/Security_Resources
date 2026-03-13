@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A curated collection of security resources, tools, and references for security professionals and enthusiasts." />
+  <title>Security Resources</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+      --text: #c9d1d9;
+      --text-muted: #8b949e;
+      --green: #3fb950;
+      --red: #f85149;
+      --yellow: #d29922;
+      --purple: #bc8cff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+
+    header .logo span { color: var(--text); }
+
+    nav {
+      margin-left: auto;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent-hover); text-decoration: none; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 4rem 2rem 3rem;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #e6edf3;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 580px;
+      margin: 0 auto 2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(88, 166, 255, 0.1);
+      border: 1px solid rgba(88, 166, 255, 0.3);
+      color: var(--accent);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── Main Grid ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #e6edf3;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title .icon { font-size: 1.1rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: #e6edf3;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .card .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2rem;
+      font-weight: 500;
+    }
+
+    .tag-blue  { background: rgba(88,166,255,0.12); color: #79c0ff; border: 1px solid rgba(88,166,255,0.25); }
+    .tag-green { background: rgba(63,185,80,0.12);  color: #56d364; border: 1px solid rgba(63,185,80,0.25); }
+    .tag-red   { background: rgba(248,81,73,0.12);  color: #ff7b72; border: 1px solid rgba(248,81,73,0.25); }
+    .tag-yellow{ background: rgba(210,153,34,0.12); color: #e3b341; border: 1px solid rgba(210,153,34,0.25); }
+    .tag-purple{ background: rgba(188,140,255,0.12);color: #d2a8ff; border: 1px solid rgba(188,140,255,0.25); }
+
+    /* ── Table ── */
+    .table-wrap { overflow-x: auto; margin-bottom: 3rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      color: var(--text-muted);
+      border-bottom: 2px solid var(--border);
+      font-weight: 600;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+    tbody td {
+      padding: 0.75rem 1rem;
+      vertical-align: middle;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer a { color: var(--text-muted); }
+    footer a:hover { color: var(--accent-hover); }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">🔒 <span>Security</span>Resources</div>
+    <nav>
+      <a href="#tools">Tools</a>
+      <a href="#learning">Learning</a>
+      <a href="#references">References</a>
+      <a href="https://github.com/webmaster-exit-1/Security_Resources">GitHub</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="badge">Open Source · Community Curated</div>
+    <h1>Security Resources</h1>
+    <p>A curated collection of security tools, learning materials, and references for security professionals, researchers, and enthusiasts.</p>
+  </section>
+
+  <main>
+
+    <!-- Security Tools -->
+    <section id="tools">
+      <h2 class="section-title"><span class="icon">🛠️</span> Security Tools</h2>
+      <div class="grid">
+
+        <div class="card">
+          <h3><a href="https://nmap.org" target="_blank" rel="noopener noreferrer">Nmap</a></h3>
+          <p>Network exploration and security auditing tool. Discover hosts and services on a network.</p>
+          <div class="tags">
+            <span class="tag tag-blue">Network</span>
+            <span class="tag tag-green">Open Source</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><a href="https://www.metasploit.com" target="_blank" rel="noopener noreferrer">Metasploit Framework</a></h3>
+          <p>Advanced open-source platform for developing, testing, and executing exploit code.</p>
+          <div class="tags">
+            <span class="tag tag-red">Exploitation</span>
+            <span class="tag tag-green">Open Source</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><a href="https://www.wireshark.org" target="_blank" rel="noopener noreferrer">Wireshark</a></h3>
+          <p>World's foremost network protocol analyzer. Capture and interactively browse network traffic.</p>
+          <div class="tags">
+            <span class="tag tag-blue">Network</span>
+            <span class="tag tag-green">Open Source</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><a href="https://portswigger.net/burp" target="_blank" rel="noopener noreferrer">Burp Suite</a></h3>
+          <p>Leading toolkit for web application security testing and vulnerability scanning.</p>
+          <div class="tags">
+            <span class="tag tag-yellow">Web</span>
+            <span class="tag tag-purple">Proxy</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><a href="https://github.com/sqlmapproject/sqlmap" target="_blank" rel="noopener noreferrer">SQLMap</a></h3>
+          <p>Automatic SQL injection and database takeover tool with broad DBMS support.</p>
+          <div class="tags">
+            <span class="tag tag-yellow">Web</span>
+            <span class="tag tag-red">Injection</span>
+            <span class="tag tag-green">Open Source</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><a href="https://www.kali.org" target="_blank" rel="noopener noreferrer">Kali Linux</a></h3>
+          <p>Debian-derived Linux distribution designed for digital forensics and penetration testing.</p>
+          <div class="tags">
+            <span class="tag tag-red">Pentesting</span>
+            <span class="tag tag-green">Open Source</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Learning Resources -->
+    <section id="learning">
+      <h2 class="section-title"><span class="icon">📚</span> Learning Resources</h2>
+      <div class="grid">
+
+        <div class="card">
+          <h3><a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a></h3>
+          <p>Standard awareness document for developers and web application security — the most critical security risks.</p>
+          <div class="tags">
+            <span class="tag tag-yellow">Web</span>
+            <span class="tag tag-blue">Standards</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><a href="https://tryhackme.com" target="_blank" rel="noopener noreferrer">TryHackMe</a></h3>
+          <p>Learn cyber security through hands-on exercises and labs in a browser-based environment.</p>
+          <div class="tags">
+            <span class="tag tag-green">Beginner Friendly</span>
+            <span class="tag tag-purple">Labs</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><a href="https://www.hackthebox.com" target="_blank" rel="noopener noreferrer">Hack The Box</a></h3>
+          <p>Online platform to test and advance your penetration testing skills in a gamified environment.</p>
+          <div class="tags">
+            <span class="tag tag-red">Pentesting</span>
+            <span class="tag tag-purple">Labs</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><a href="https://portswigger.net/web-security" target="_blank" rel="noopener noreferrer">PortSwigger Web Security Academy</a></h3>
+          <p>Free, online web security training with interactive labs covering all major vulnerability classes.</p>
+          <div class="tags">
+            <span class="tag tag-yellow">Web</span>
+            <span class="tag tag-green">Free</span>
+            <span class="tag tag-purple">Labs</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><a href="https://www.sans.org" target="_blank" rel="noopener noreferrer">SANS Institute</a></h3>
+          <p>Provider of cyber security training, certifications, and research including the GIAC certification program.</p>
+          <div class="tags">
+            <span class="tag tag-blue">Training</span>
+            <span class="tag tag-yellow">Certification</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><a href="https://ctftime.org" target="_blank" rel="noopener noreferrer">CTFtime</a></h3>
+          <p>Directory of Capture The Flag competitions worldwide — track events, teams, and write-ups.</p>
+          <div class="tags">
+            <span class="tag tag-red">CTF</span>
+            <span class="tag tag-green">Community</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- References -->
+    <section id="references">
+      <h2 class="section-title"><span class="icon">📋</span> Quick Reference</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Resource</th>
+              <th>Category</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="https://nvd.nist.gov" target="_blank" rel="noopener noreferrer">NVD (National Vulnerability Database)</a></td>
+              <td><span class="tag tag-blue">Vulnerability DB</span></td>
+              <td>U.S. government repository of standards-based vulnerability management data.</td>
+            </tr>
+            <tr>
+              <td><a href="https://cve.mitre.org" target="_blank" rel="noopener noreferrer">CVE / MITRE</a></td>
+              <td><span class="tag tag-blue">Vulnerability DB</span></td>
+              <td>Common Vulnerabilities and Exposures — the industry standard for naming vulnerabilities.</td>
+            </tr>
+            <tr>
+              <td><a href="https://attack.mitre.org" target="_blank" rel="noopener noreferrer">MITRE ATT&amp;CK</a></td>
+              <td><span class="tag tag-red">Framework</span></td>
+              <td>Globally accessible knowledge base of adversary tactics and techniques.</td>
+            </tr>
+            <tr>
+              <td><a href="https://csrc.nist.gov/publications/detail/sp/800-53/rev-5/final" target="_blank" rel="noopener noreferrer">NIST SP 800-53</a></td>
+              <td><span class="tag tag-blue">Standards</span></td>
+              <td>Security and privacy controls for information systems and organizations.</td>
+            </tr>
+            <tr>
+              <td><a href="https://www.cisa.gov" target="_blank" rel="noopener noreferrer">CISA</a></td>
+              <td><span class="tag tag-yellow">Government</span></td>
+              <td>Cybersecurity and Infrastructure Security Agency — advisories, alerts, and best practices.</td>
+            </tr>
+            <tr>
+              <td><a href="https://www.exploit-db.com" target="_blank" rel="noopener noreferrer">Exploit Database</a></td>
+              <td><span class="tag tag-red">Exploitation</span></td>
+              <td>Archive of exploits and vulnerable software maintained by Offensive Security.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <a href="https://github.com/webmaster-exit-1/Security_Resources" target="_blank" rel="noopener noreferrer">Security Resources</a>
+      &nbsp;·&nbsp;
+      Open Source &amp; Community Curated
+      &nbsp;·&nbsp;
+      <a href="https://github.com/webmaster-exit-1/Security_Resources/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a>
+    </p>
+  </footer>
+
+</body>
+</html>
